@@ -1,4 +1,4 @@
-# QUY TẮC COMMIT 
+# QUY TẮC COMMIT
 
 ## Các bước commit
 
@@ -23,7 +23,7 @@
 
 - Tên branch phải có dạng: `<category>/?<reference>/<description-in-kebab-case>`
   - Trong đó:
-    - category: `feature`, `bugfix`, `hotfix`, `refactor`, `style`, `test`, `doc`
+    - category: `feature`, `bugfix`, `hotfix`, `refactor`, `style`, `test`, `document`
     - reference: `issue/ticket`, `pr`, `no-ref`
     - description-in-kebab-case: mô tả ngắn gọn về nội dung thay đổi, viết thường, cách nhau bởi dấu `-`
 - vd: `git branch feature/issue-42/create-new-button-component`
