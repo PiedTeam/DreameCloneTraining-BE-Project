@@ -1,23 +1,19 @@
-import swaggerUi from 'swagger-ui-express'
 import { config } from 'dotenv'
 import databaseService from './module/database/database.service'
 import express from 'express'
 import cors from 'cors'
-import YAML from 'yaml'
-import fs from 'fs'
-import path from 'path'
-import swaggerJSDoc from 'swagger-jsdoc'
 
 config()
+const app = express()
+const PORT = process.env.PORT || 4000
 //cors
 const corsOptions = {
-  origin: 'http://localhost:4000' || 'http://localhost:5173',
+  origin: `http://localhost:${PORT}`,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200
 }
 //import express
-const app = express()
-const PORT = process.env.PORT || 4000
+
 app.use(cors(corsOptions))
 
 //app handler

@@ -1,11 +1,11 @@
 {
-  "name": "dreame-backend",
-  "packageManager": "yarn@4.1.1",
+  "name": "dreame-clone-training-be",
   "description": "Dreame Piedteam Backend",
   "main": "./dist/index.js",
   "repository": {
     "type": "module"
   },
+  "private": true,
   "scripts": {
     "server": "npx ts-node ./src/index.ts",
     "dev": "yarn run nodemon",
@@ -16,8 +16,6 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
