@@ -19,9 +19,11 @@ app.use(cors(corsOptions))
 //app handler
 app.use(express.json())
 //route
+app.use('/', (req, res) => {
+  res.send('This is home page')
+})
 
 //database connect
-databaseService.connect()
 
 //Port
 app.listen(PORT, () => {
