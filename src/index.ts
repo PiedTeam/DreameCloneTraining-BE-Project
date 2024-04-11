@@ -1,5 +1,4 @@
 import { config } from 'dotenv'
-import databaseService from './module/database/database.service'
 import express from 'express'
 import cors from 'cors'
 
