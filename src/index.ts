@@ -25,5 +25,5 @@ databaseService.connect()
 
 //Port
 app.listen(PORT, () => {
-  console.log(`server này đang chạy trên port:::${PORT}`)
+  console.log(`Server is running on http://localhost:${PORT}`)
 })
