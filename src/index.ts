@@ -1,6 +1,7 @@
+import cors from 'cors'
 import { config } from 'dotenv'
 import express from 'express'
-import cors from 'cors'
+import fileRouter from './module/file/file.route'
 
 config()
 const app = express()
@@ -18,10 +19,11 @@ app.use(cors(corsOptions))
 //app handler
 app.use(express.json())
 //route
-app.use('/', (req, res) => {
+app.use('/file', fileRouter)
+
+app.use('/', (_, res) => {
   res.send('This is home page')
 })
-
 //database connect
 
 //Port
