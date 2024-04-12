@@ -3,19 +3,37 @@
 # Require to install
 
 ```bash
-yarn add multer body-parser
+yarn add multer body-parser xlsx
 ```
 
-- I've implement the way to check file name
+- This is the data of file transfer by multer
 
-```text
-des: check the file name by format
-method: post
-path: /file/name
-body:
+```json
 {
-  "fileName":"Products Dreame.vi.xlsx"
+  "fieldname": "myFile",
+  "originalname": "demo.txt",
+  "encoding": "7bit",
+  "mimetype": "text/plain",
+  "destination": "./uploads",
+  "filename": "myFile-1712912837970",
+  "path": "uploads/myFile-1712912837970",
+  "size": 7
 }
 ```
 
-![image](https://github.com/PiedTeam/DreameCloneTraining-BE-Project/assets/136492579/da9e76e4-fc60-465e-be97-2db4c6e7bbc7)
+```text
+description: validate file format
+method: POST
+path: /file/upload
+body{
+  form-data: {
+    myFile: file
+  }
+}
+```
+
+## In this section, i've created a file upload API with the following features:
+
+- Validate File Name
+- Validate File Size
+- File not corrupted

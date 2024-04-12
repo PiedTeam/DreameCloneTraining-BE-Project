@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser'
 import cors from 'cors'
 import { config } from 'dotenv'
 import express from 'express'
@@ -15,6 +16,9 @@ const corsOptions = {
 //import express
 
 app.use(cors(corsOptions))
+
+// server can handle the req.body
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //app handler
 app.use(express.json())

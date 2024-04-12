@@ -1,15 +1,39 @@
 import { NextFunction, Request, Response } from 'express'
-import { validateFileName } from './file.controller'
-import { FileName } from './file.model'
+import HTTP_STATUS from '../message/httpStatus'
+import File from './file.schema'
 
-// const fileName = new FileName('Products Dreame vi.xlsx')
-
-export function fileValidator(req: Request, res: Response, _: NextFunction) {
-  const { fileName } = req.body
-  const result = validateFileName(fileName)
-  if (result) {
-    return res.status(200).send('File name is valid')
-  } else {
-    res.status(400).json('Invalid file name')
+export function fileValidator(req: Request, res: Response, next: NextFunction) {
+  const file = req.file
+  if (file) {
+    const fileInstance = new File(file)
+    if (!fileInstance.validateName()) {
+      const result = {
+        message: 'Invalid file name',
+        describe: 'File name must follow by <Category Dreame.vi/en.xls/xlsx/cvs>'
+      }
+      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+    }
+    if (!fileInstance.validateSize()) {
+      const result = {
+        message: 'Invalid file size',
+        describe: 'File size must be smaller or equal than 10MB'
+      }
+      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+    }
+    //check file is open or corrupted
+    if (!fileInstance.validateOpenFile()) {
+      const result = {
+        message: 'Invalid file',
+        describe: 'File is corrupted'
+      }
+      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+    }
+    res.status(HTTP_STATUS.OK).send({
+      message: 'File is valid',
+      file: fileInstance.getFile
+    })
   }
+  res.status(HTTP_STATUS.BAD_REQUEST).send({
+    message: 'File is required'
+  })
 }
