@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import express from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 
 config();
@@ -29,7 +29,9 @@ app.use(cors(corsOptions));
 
 // middleware
 // this is for parsing json data
-app.use(express.json());
+const jsonParseMiddleware = json();
+app.use(jsonParseMiddleware);
+
 // this is for logging
 app.all('*', (req, res, next) => {
   console.log('Time', Date.now());
