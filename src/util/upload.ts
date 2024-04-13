@@ -16,7 +16,7 @@ export function configUploadFile(uploadDir: string) {
       cb(null, uploadDir)
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
+      cb(null, file.originalname + '-' + Date.now())
     }
   })
   return storage
