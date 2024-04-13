@@ -11,14 +11,14 @@ export function fileValidator(req: Request, res: Response, next: NextFunction) {
         message: 'Invalid file name',
         describe: 'File name must follow by <Category Dreame.vi/en.xls/xlsx/cvs>'
       }
-      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+      return res.status(HTTP_STATUS.BAD_REQUEST).json(result)
     }
     if (!fileInstance.validateSize()) {
       const result = {
         message: 'Invalid file size',
         describe: 'File size must be smaller or equal than 10MB'
       }
-      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+      return res.status(HTTP_STATUS.BAD_REQUEST).json(result)
     }
     //check file is open or corrupted
     if (!fileInstance.validateOpenFile()) {
@@ -26,14 +26,14 @@ export function fileValidator(req: Request, res: Response, next: NextFunction) {
         message: 'Invalid file',
         describe: 'File is corrupted'
       }
-      res.status(HTTP_STATUS.BAD_REQUEST).json(result)
+      return res.status(HTTP_STATUS.BAD_REQUEST).json(result)
     }
-    res.status(HTTP_STATUS.OK).send({
+    return res.status(HTTP_STATUS.OK).send({
       message: 'File is valid',
       file: fileInstance.getFile
     })
   }
-  res.status(HTTP_STATUS.BAD_REQUEST).send({
+  return res.status(HTTP_STATUS.BAD_REQUEST).send({
     message: 'File is required'
   })
 }
