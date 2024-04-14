@@ -1,32 +1,35 @@
 ﻿# BE_CODING_CONVENTION.md
 
-- **IMPORTANT**:
-  - For easier to maintain code later
-  - Variable, File, Folder **must** not contain `'s'`
+> **IMPORTANT**:
+> Code to be Maintain later
+> Variable, File, Folder **MUST NOT** contain `'s'`
+> Whole `src` **MUST NOT** exist the hyphen `-`
 
 ```
-bad : users, products, ...
+bad: users, products, ...
+
 good: user, product, ...
-or  : userArray, userList, userCollection, ... (the return data types)
+
+or: userArray, userList, userCollection, ... (the return data types)
+
+bad: customer-report
 ```
 
-- **NOTE**: whole `src` do not exist the hyphen `-`
+- Use [Eslint Typescript](https://typescript-eslint.io/getting-started/) format suggestion
+- Use [Prettier](https://prettier.io/docs/en/#docsNav)
+- Use [Husky](https://typicode.github.io/husky/how-to.html)
 
-  > customer-report (BAD)
+- File and Model names need to be identical.
 
-- Use Eslint Typescript format suggestion: https://typescript-eslint.io/getting-started/
-- Use Prettier
-- Use Husky
-- File and Component names need to be identical.
-- Use PascalCase naming convention for filename as well as component name
-- Using const for naming variables
-- Use ES6 Syntax
+```
+good: folder: student, file: student.route.ts  
+```
+
+- Export to ES6
 
 # Interact between FE and BE
 
-- For `json` the property must follow the **snake_case**
-
-  > To distinguish it from Class properties
+> JSON property must follow the **snake_case** to distinguish it from Class properties
 
 - Good
 
@@ -59,124 +62,143 @@ or  : userArray, userList, userCollection, ... (the return data types)
 
 # Folder Name (entity)
 
-- `camelCase`
-- Must not begin with a digit.
+- Use `camelCase`
+- Must not begin with a digit
 - Must not contain special characters
 
+```
+bad: User, User-Report, User_Report, UserReport, @userReport
+good: user, userReport
+```
+
+# File Name
+
+- Use `camelCase`
+- Must not begin with a digit
+- Must not contain special characters
 - Good
 
-```
-user, userReport, userReport
+```ts
+user.middleware.ts, userReport.middleware.ts, product.controller.ts;
 ```
 
 - Bad
 
-```js
-User, User - Report, User_Report, UserReport;
-```
-
-# File Folder
-
-- use `camelCase`
-- Good
-
-```
-user.middleware.ts, userReport.middleware.ts, product.controller.ts
-```
-
-- Bad
-
-```
+```ts
 Users, products.Controller, ...
 ```
 
-# Class Folder
+# Class Name
 
 - Use `PascalCase`
-- Must not begin with a digit.
+- Must not begin with a digit
 - Must not contain special characters
 - Good
 
-```
-User, UserReport
+```ts
+User, UserReport;
 ```
 
 - Bad
 
-```
-user, userReport, user_report
+```ts
+user, userReport, user_report;
 ```
 
 # Properties of Class
 
 - Use `PascalCase`
-- Must not begin with a digit.
+- Must not begin with a digit
 - Must not contain special characters
 - Good
 
-```
-userId, userName
+```ts
+userId, userName;
 ```
 
 - Bad
 
+```ts
+user_id, user_name, user - name;
 ```
-user_id, user_name, user-name
-```
 
-# enum
+# Enum Name
 
-- UPPER_CASE
+- Use `UPPER_CASE`
 
-```js
+```ts
 export enum USER_ROLE {
-    ADMIN,
-    STAFF,
-    STUDENT
+  ADMIN,
+  STAFF,
+  STUDENT,
 }
 ```
 
-# type
+# Type
 
-- PascalCase
+- Use `PascalCase`
 - N + 'Type'
 
-```js
+```ts
 export type UserType = {
-	userId: string
-	userName: string
-}
+  userId: string;
+  userName: string;
+};
 ```
 
-# interface
+# Interface
 
-- 'I' + PascalCase
+- 'I' + `PascalCase`
 
-```js
+```ts
 export interface IUser {
-	userId: string
-	userName: string
+  userId: string;
+  userName: string;
 }
 ```
 
-# function
+# Function
 
 - Use `camelCase`
+- **Must start with a verb**
 - Must not begin with a digit.
 - Must not contain special characters
 - Good:
 
-```
-getUser
+```ts
+function getUser() {}
 ```
 
 - Bad
 
-```
-get_user, get-user
+```ts
+function get_user() {}
+function get-user() {}
 ```
 
-# variables
+# Function Documentation
+
+- **After each function update need to update the version**
+- Just write full lowercase
+
+```ts
+/**
+ * check if a number is a prime
+ * @param {number} num - number need to check
+ * @returns {Boolean} - true or false
+ * @example isPrime(5)
+ * @description
+ * this function check whether a number is a prime number. return false if the input is not a integer
+ * @author hoangnn
+ * @version 0.0.1
+ */
+function isPrime(num: number): Boolean {
+  // Logic
+  // ...
+}
+```
+
+# Variables
 
 - Variable names can contain alphabets and numeric digits.
 - They cannot contain spaces and special characters, except the underscore (\_) and the dollar ($) sign.
@@ -198,7 +220,7 @@ const 1_userName = "JohnDoe";
 
 - Good
 
-```js
+```ts
 function getUser() {
   // logic
 }
@@ -206,46 +228,24 @@ function getUser() {
 
 - Bad
 
-```js
+```ts
 const getUser = () => {
   // logic
 };
-```
-
-# Function Documentation
-
-- After each function update, the version must be updated
-
-```js
-/**
- * Kiểm tra xem một số có phải là số nguyên tố hay không.
- * @param {number} num - Số cần kiểm tra.
- * @returns {boolean} - True nếu số nguyên tố, false nếu không phải.
- * @example isPrime(5)
- * @description
- * Hàm này kiểm tra xem số được cung cấp có phải là số nguyên tố hay không.
- * Số nguyên tố là số chỉ chia hết cho 1 và chính nó.
- * @author [Tên tác giả]
- * @version 0.0.1
- */
-function isPrime(num) {
-  // Logic kiểm tra số nguyên tố ở đây
-  // ...
-}
 ```
 
 # Route
 
 - Must
 
-```js
+```ts
 /*
 desc: add new course
 method: POST
 path: /course/add-new-course
 headers: {
-	params: ... (có hoặc không)
-	query: ... (có hoặc không)
+	params: ... (require or not)
+	query: ... (require or not)
 	Authorization: Bearer <access_token>
 }
 body: AddNewCourseReqBodyType (syntax feature+ReqBodyType)
