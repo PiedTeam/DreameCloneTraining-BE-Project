@@ -1,0 +1,6 @@
+{
+  "watch": ["src", "openapi"],
+  "ext": ".ts,.js,.yaml",
+  "ignore": ["node_modules", "dist"],
+  "exec": "yarn ts-node ./src/index.ts"
+}

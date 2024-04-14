@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./dist",
+    "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["src"]
+}

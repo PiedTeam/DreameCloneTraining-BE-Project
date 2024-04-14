@@ -19,7 +19,7 @@
 - Create a `new branch` from `main`
 
 - Branch name must be in the form: `<category>/?<reference>/<description-in-kebab-case>`
-  
+
   - In there:
     - category: `feature`, `bugfix`, `hotfix`, `refactor`, `style`, `test`, `document`
     - reference: `issue/ticket`, `pr`, `no-ref`
