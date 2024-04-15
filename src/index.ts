@@ -1,36 +1,56 @@
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import { config } from 'dotenv'
-import express from 'express'
+import express, { json } from 'express'
 import fileRouter from './module/file/file.route'
 
 config()
 const app = express()
-const PORT = process.env.PORT || 4000
-//cors
+const PORT_SERVER = process.env.PORT_SERVER ?? 4000
+
+// env
+const isProduction = process.env.NODE_ENV === 'production'
+const frontendURL = isProduction ? process.env.PRODUCTION_FRONTEND_URL : process.env.DEVELOPMENT_FRONTEND_URL
+
+// const databaseURL = isProduction
+//   ? process.env.PRODUCTION_DATABASE_URL
+//   : process.env.DEVELOPMENT_DATABASE_URL;
+
+// cors
 const corsOptions = {
-  origin: `http://localhost:${PORT}`,
-  credentials: true, //access-control-allow-credentials:true
+  origin: frontendURL,
+  credentials: true, // access-control-allow-credentials:true
+  allowedHeaders: ['Content-Type', 'Authorization'], // access-control-allow-headers
   optionSuccessStatus: 200
 }
-//import express
 
+// cors middleware
 app.use(cors(corsOptions))
 
-// server can handle the req.body
-app.use(bodyParser.urlencoded({ extended: true }))
+// middleware
+// this is for parsing json data
+const jsonParseMiddleware = json()
+app.use(jsonParseMiddleware)
 
-//app handler
-app.use(express.json())
+// this is for logging
+app.all('*', (req, res, next) => {
+  console.log('Time', Date.now())
+  console.log(req)
+  next()
+})
+
+// route
 //route
 app.use('/file', fileRouter)
 
-app.use('/', (_, res) => {
+app.use('/', (req, res) => {
   res.send('This is home page')
 })
-//database connect
 
-//Port
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
+// database connect
+
+// error handler
+
+// port
+app.listen(PORT_SERVER, () => {
+  console.log(`Server is running on http://localhost:${PORT_SERVER}`)
 })
