@@ -1,4 +1,4 @@
-import { validateName, validateOpenFile, validateSize } from '~/util/upload';
+import { validateName, validateOpenFile, validateSize, validateTitle } from '~/util/upload';
 import File from './file.schema';
 
 interface ValidationResult {
@@ -12,7 +12,7 @@ export function validateFile(fileInstance: File): ValidationResult {
   const isValidName = validateName(fileInstance.getName);
   const isValidSize = validateSize(fileInstance.getSize);
   const isCorrupted = validateOpenFile(fileInstance.getFile.path);
-
+  const isMatchTitle = validateTitle(fileInstance);
   if (!isValidName) {
     return {
       isValid: false,
@@ -36,6 +36,15 @@ export function validateFile(fileInstance: File): ValidationResult {
       isValid: false,
       result: {
         message: 'File is corrupted',
+      },
+    };
+  }
+
+  if (!isMatchTitle) {
+    return {
+      isValid: false,
+      result: {
+        message: 'Title is not match',
       },
     };
   }
