@@ -45,7 +45,9 @@
     // override prettier
     "prettier/prettier": [
       "error",
-      {},
+      {
+        "endOfLine": "auto"
+      },
       {
         "usePrettierrc": true
       }
