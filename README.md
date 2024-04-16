@@ -4,6 +4,7 @@
 
 ```bash
 yarn add multer body-parser xlsx
+yarn add @types/multer -D
 ```
 
 - This is the data of file transfer by multer

@@ -1,34 +1,46 @@
-import File from './file.schema'
+import { validateName, validateOpenFile, validateSize } from '~/util/upload';
+import File from './file.schema';
 
-export function validateFile(fileInstance: File) {
-  if (!fileInstance.validateName()) {
+interface ValidationResult {
+  isValid: boolean;
+  result?: {
+    message: string;
+  };
+}
+
+export function validateFile(fileInstance: File): ValidationResult {
+  const isValidName = validateName(fileInstance.getName);
+  const isValidSize = validateSize(fileInstance.getSize);
+  const isCorrupted = validateOpenFile(fileInstance.getFile.path);
+
+  if (!isValidName) {
     return {
       isValid: false,
       result: {
         message: 'Invalid file name',
-        describe: 'File name must follow by <Category Dreame.vi/en.xls/xlsx/cvs>'
-      }
-    }
+      },
+    };
   }
-  if (!fileInstance.validateSize()) {
+
+  if (!isValidSize) {
     return {
       isValid: false,
       result: {
-        message: 'Invalid file size',
-        describe: 'File size must be smaller or equal than 10MB'
-      }
-    }
+        message: 'File size is too large, ensure it is less than 10MB',
+      },
+    };
   }
-  if (!fileInstance.validateOpenFile()) {
+
+  if (!isCorrupted) {
     return {
       isValid: false,
       result: {
-        message: 'Invalid file',
-        describe: 'File is corrupted'
-      }
-    }
+        message: 'File is corrupted',
+      },
+    };
   }
+
   return {
-    isValid: true
-  }
+    isValid: true,
+  };
 }
