@@ -35,9 +35,7 @@ export function validateOpenFile(path: string): boolean {
   try {
     readFile(path);
     return true;
-    // eslint-disable-next-line @stylistic/brace-style
   } catch (e) {
-    // if reach here, the file is only corrupted
     return false;
   }
 }
