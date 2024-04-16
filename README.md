@@ -36,5 +36,15 @@ body{
 ## In this section, i've created a file upload API with the following features:
 
 - Validate File Name
+  - ![filename](https://github.com/PiedTeam/DreameCloneTraining-BE-Project/assets/136492579/3aeb9513-3f4b-48c7-9e86-bb3a8a91ca51)
 - Validate File Size
+  - ![size](https://github.com/PiedTeam/DreameCloneTraining-BE-Project/assets/136492579/43b8f4fe-99fa-41fa-a448-42ff9f231bd1)
 - File not corrupted
+  - ![corrupted](https://github.com/PiedTeam/DreameCloneTraining-BE-Project/assets/136492579/266c4793-870f-4534-ae74-5d8d1b08ff4b)
+- Ok
+  - ![ok](https://github.com/PiedTeam/DreameCloneTraining-BE-Project/assets/136492579/22429df4-ddb6-420a-b689-b5dfc0bd63d8)
+
+
+
+
+
