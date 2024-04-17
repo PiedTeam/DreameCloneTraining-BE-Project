@@ -42,25 +42,40 @@ export function validateOpenFile(path: string): boolean {
   }
 }
 
+function getDataFile(file: File, header: boolean): string[] {
+  const path = file.getPath;
+  const workbook = readFile(path);
+  const sheetNameList = workbook.SheetNames;
+  const sheet = workbook.Sheets[sheetNameList[0]];
+
+  // Convert sheet to JSON with the first row as the header
+  const fullData = utils.sheet_to_json(sheet, { header: 1 });
+
+  // if header is true, it will return full data (title and data inside)
+  // else it will return the data only
+  if (header) {
+    return fullData as string[];
+  } else {
+    // remove the first element (title of the columns)
+    fullData.shift();
+    return fullData as string[];
+  }
+}
+
 // validate inside file
 export function validateTitle(file: File): boolean {
   try {
-    const path = file.getPath;
-    const workbook = readFile(path);
-    const sheet_name_list = workbook.SheetNames;
-    const sheet = workbook.Sheets[sheet_name_list[0]];
-
     // Convert sheet to JSON with the first row as the header
-    const xlData = utils.sheet_to_json(sheet, { header: 1 });
+    const data = getDataFile(file, true);
 
     // Extract the first row as the title of columns
-    const title = xlData[0] as string[];
-
-    // Remove the first row (title row) from the data array
-    // xlData.shift()
+    const title = data[0];
 
     // Adjust the Enum here to retrieve the title of the columns
     const enumValues = Object.values(PRODUCT_TITLE_EN);
+    console.log(title);
+
+    console.log(enumValues);
 
     // Bring to compare the title with the enum values
     for (const item of enumValues) {
@@ -73,3 +88,10 @@ export function validateTitle(file: File): boolean {
     return false;
   }
 }
+
+// export function isMatchDataType(file: File): boolean {
+//   try {
+//   } catch (e) {
+//     return false;
+//   }
+// }
