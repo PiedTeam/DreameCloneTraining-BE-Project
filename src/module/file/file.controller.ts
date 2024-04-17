@@ -1,5 +1,5 @@
 import { validateName, validateOpenFile, validateSize, validateTitle } from '~/util/upload';
-import File from './file.schema';
+import File from './schema/file.schema';
 
 interface ValidationResult {
   isValid: boolean;

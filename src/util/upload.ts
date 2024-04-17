@@ -2,7 +2,7 @@ import fs from 'fs';
 import { diskStorage, StorageEngine } from 'multer';
 import { readFile, utils } from 'xlsx';
 import { PRODUCT_TITLE_EN } from '~/module/file/file.enum';
-import File from '~/module/file/file.schema';
+import File from '~/module/file/schema/file.schema';
 import { REGEX_NAME_FILE } from './regex';
 
 const uploadDir = './src/module/upload';
