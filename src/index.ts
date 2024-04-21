@@ -41,7 +41,6 @@ app.all('*', (req, res, next) => {
 });
 
 // route
-// route
 app.use('/file', fileRouter);
 
 app.use('/', (req, res) => {
