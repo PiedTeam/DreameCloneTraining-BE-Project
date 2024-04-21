@@ -9,7 +9,6 @@ export function fileValidator(req: Request, res: Response): void {
     res.status(HTTP_STATUS.BAD_REQUEST).send({
       message: 'File is required',
     });
-    // eslint-disable-next-line @stylistic/brace-style
   } else {
     const fileInstance = new File(file);
     const validateResult = validateFile(fileInstance);
@@ -18,7 +17,6 @@ export function fileValidator(req: Request, res: Response): void {
         message: 'File is valid',
         file: fileInstance.getFile,
       });
-      // eslint-disable-next-line @stylistic/brace-style
     } else {
       res.status(HTTP_STATUS.BAD_REQUEST).json(validateResult.result);
     }

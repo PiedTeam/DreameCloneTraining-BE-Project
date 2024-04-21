@@ -1,4 +1,4 @@
-interface IFileType {
+interface IFile {
   fieldname: string;
   originalname: string;
   encoding: string;
@@ -10,11 +10,11 @@ interface IFileType {
 }
 
 export default class File {
-  constructor(private file: IFileType) {
+  constructor(private file: IFile) {
     this.file = file;
   }
 
-  get getFile(): IFileType {
+  get getFile(): IFile {
     return this.file;
   }
 
