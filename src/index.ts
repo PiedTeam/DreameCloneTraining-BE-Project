@@ -53,5 +53,6 @@ app.use('/', (req, res) => {
 
 // port
 app.listen(PORT_SERVER, () => {
+  console.log(`Server is running in ${isProduction ? 'production' : 'development'} mode`);
   console.log(`Server is running on http://localhost:${PORT_SERVER}`);
 });
