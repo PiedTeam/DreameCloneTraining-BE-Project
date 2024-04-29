@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { diskStorage, StorageEngine } from 'multer';
 import { readFile, utils } from 'xlsx';
-import { PRODUCT_TITLE_EN } from '~/module/file/file.enum';
+import { PRODUCT_TITLE_EN, PRODUCT_TITLE_VI } from '~/module/file/file.enum';
 import File from '~/module/file/schema/file.schema';
+import { isEnglishOrVietnamese } from './file';
 import { REGEX_NAME_FILE } from './regex';
 
 const uploadDir = './src/module/upload';
@@ -72,10 +73,14 @@ export function validateTitle(file: File): boolean {
     const title = data[0];
 
     // Adjust the Enum here to retrieve the title of the columns
-    const enumValues = Object.values(PRODUCT_TITLE_EN);
-    console.log(title);
 
-    console.log(enumValues);
+    let enumValues;
+
+    if (isEnglishOrVietnamese(file.getPath)) {
+      enumValues = Object.values(PRODUCT_TITLE_EN);
+    } else {
+      enumValues = Object.values(PRODUCT_TITLE_VI);
+    }
 
     // Bring to compare the title with the enum values
     for (const item of enumValues) {

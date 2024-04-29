@@ -1,3 +1,4 @@
+import { getColumnData } from '~/util/file';
 import { validateName, validateOpenFile, validateSize, validateTitle } from '~/util/upload';
 import File from './schema/file.schema';
 
@@ -48,6 +49,8 @@ export function validateFile(fileInstance: File): ValidationResult {
       },
     };
   }
+
+  console.log(getColumnData(fileInstance.getPath, 'mô tả'));
 
   return {
     isValid: true,

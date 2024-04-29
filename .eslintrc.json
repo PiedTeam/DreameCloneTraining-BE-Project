@@ -34,6 +34,7 @@
     "@typescript-eslint/array-type": "error",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@stylistic/semi": ["error", "always"],
+    "@stylistic/quote-props": ["error", "as-needed"], // Add this line
     "@stylistic/arrow-parens": ["error", "always"],
     "@stylistic/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "@stylistic/member-delimiter-style": [
