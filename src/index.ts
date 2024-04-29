@@ -1,6 +1,7 @@
+import cors from 'cors';
 import { config } from 'dotenv';
 import express, { json } from 'express';
-import cors from 'cors';
+import fileRouter from './module/file/file.route';
 
 config();
 const app = express();
@@ -40,6 +41,8 @@ app.all('*', (req, res, next) => {
 });
 
 // route
+app.use('/file', fileRouter);
+
 app.use('/', (req, res) => {
   res.send('This is home page');
 });
