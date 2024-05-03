@@ -2,8 +2,25 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import express, { json } from 'express';
 import fileRouter from './module/file/file.route';
+import { DATABASE_MESSAGE } from './module/message/message';
+import productRouter from './module/product/product.route';
+import databaseService from './service/database.service';
 
 config();
+
+// database connect
+databaseService
+  .connect()
+  .then(() => {
+    console.log(DATABASE_MESSAGE.CONNECT_SUCCESS);
+    return true;
+  })
+  .catch((error: unknown) => {
+    console.error(DATABASE_MESSAGE.CONNECT_FAILED);
+    console.error(error);
+    return false;
+  });
+
 const app = express();
 const PORT_SERVER = process.env.PORT_SERVER ?? 4000;
 
@@ -43,11 +60,11 @@ app.all('*', (req, res, next) => {
 // route
 app.use('/file', fileRouter);
 
+app.use('/product', productRouter);
+
 app.use('/', (req, res) => {
   res.send('This is home page');
 });
-
-// database connect
 
 // error handler
 
