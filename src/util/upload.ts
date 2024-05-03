@@ -13,6 +13,7 @@ export function initUploadDir(): string {
   }
   return uploadDir;
 }
+
 export function configUploadFile(uploadDir: string): StorageEngine {
   const storage = diskStorage({
     destination: function (req, file, cb) {
