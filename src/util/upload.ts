@@ -2,7 +2,7 @@ import fs from 'fs';
 import { diskStorage, StorageEngine } from 'multer';
 import { readFile, utils } from 'xlsx';
 import { PRODUCT_TITLE_EN, PRODUCT_TITLE_VI } from '~/module/file/file.enum';
-import File from '~/module/file/schema/file.schema';
+import File from '~/module/file/file.schema';
 import { isEnglishOrVietnamese } from './file';
 import { REGEX_NAME_FILE } from './regex';
 
@@ -43,23 +43,30 @@ export function validateOpenFile(path: string): boolean {
   }
 }
 
-function getDataFile(file: File, header: boolean): string[] {
+export function getDataFile<T>(file: File, header: boolean, typeOfData: 'array' | 'object'): T[] {
   const path = file.getPath;
   const workbook = readFile(path);
   const sheetNameList = workbook.SheetNames;
   const sheet = workbook.Sheets[sheetNameList[0]];
 
-  // Convert sheet to JSON with the first row as the header
-  const fullData = utils.sheet_to_json(sheet, { header: 1 });
+  let fullData;
+  if (typeOfData === 'object') {
+    // header : 0 -> the data will be object[]
+    fullData = utils.sheet_to_json(sheet, { header: 0 });
+  } else if (typeOfData === 'array') {
+    // header: 1 -> the data will be array[]
+    fullData = utils.sheet_to_json(sheet, { header: 1 });
+  }
 
-  // if header is true, it will return full data (title and data inside)
-  // else it will return the data only
-  if (header) {
-    return fullData as string[];
+  // with header or without header, the typeOfData 'object' will remain full data
+  // only accept header is true for typeOfData 'array' will remain, if header is false, remove the header
+  if (((header || !header) && typeOfData === 'object') || (header && typeOfData === 'array')) {
+    return fullData as T[];
+  } else if (!header && typeOfData === 'array') {
+    fullData?.shift();
+    return fullData as T[];
   } else {
-    // remove the first element (title of the columns)
-    fullData.shift();
-    return fullData as string[];
+    return [];
   }
 }
 
@@ -67,7 +74,7 @@ function getDataFile(file: File, header: boolean): string[] {
 export function validateTitle(file: File): boolean {
   try {
     // Convert sheet to JSON with the first row as the header
-    const data = getDataFile(file, true);
+    const data = getDataFile<string[]>(file, true, 'array');
 
     // Extract the first row as the title of columns
     const title = data[0];

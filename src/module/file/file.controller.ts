@@ -1,6 +1,12 @@
 import { getColumnData } from '~/util/file';
-import { validateName, validateOpenFile, validateSize, validateTitle } from '~/util/upload';
-import File from './schema/file.schema';
+import {
+  getDataFile,
+  validateName,
+  validateOpenFile,
+  validateSize,
+  validateTitle,
+} from '~/util/upload';
+import File from './file.schema';
 
 interface ValidationResult {
   isValid: boolean;
@@ -50,7 +56,12 @@ export function validateFile(fileInstance: File): ValidationResult {
     };
   }
 
-  console.log(getColumnData(fileInstance.getPath, 'mô tả'));
+  console.log('Data inside' + fileInstance.getName);
+  console.log(getDataFile(fileInstance, false, 'object'));
+
+  const column = 'description';
+  console.log(`Data of column ${column}`);
+  console.log(getColumnData(fileInstance.getPath, column));
 
   return {
     isValid: true,

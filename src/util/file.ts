@@ -1,5 +1,5 @@
 import { readFile, utils } from 'xlsx';
-import { ProductENType, ProductVIType } from '~/module/file/schema/product.schema';
+import { ProductENType, ProductVIType } from '~/module/product/product.schema';
 import { REGEX_ID_COLUMN } from './regex';
 
 export function getFileData(path: string): object[] {
