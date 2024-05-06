@@ -60,7 +60,8 @@ app.all('*', (req, res, next) => {
 // route
 app.use('/file', fileRouter);
 
-app.use('/product', productRouter);
+// Node-Red
+app.use('/api', productRouter);
 
 app.use('/', (req, res) => {
   res.send('This is home page');
