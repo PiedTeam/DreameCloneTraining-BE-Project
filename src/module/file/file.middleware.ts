@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import HTTP_STATUS from '../message/httpStatus';
 import { validateFile } from './file.controller';
-import File from './schema/file.schema';
+import File from './file.schema';
 
 export function uploadValidator(req: Request, res: Response): void {
   const file = req.file;
