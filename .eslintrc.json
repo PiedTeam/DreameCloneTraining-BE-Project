@@ -32,7 +32,9 @@
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/consistent-type-definitions": "off",
     "@stylistic/semi": ["error", "always"],
+    "@stylistic/quote-props": ["error", "as-needed"], // Add this line
     "@stylistic/arrow-parens": ["error", "always"],
     "@stylistic/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "@stylistic/member-delimiter-style": [
@@ -45,9 +47,7 @@
     // override prettier
     "prettier/prettier": [
       "error",
-      {
-        "endOfLine": "auto"
-      },
+      {},
       {
         "usePrettierrc": true
       }
