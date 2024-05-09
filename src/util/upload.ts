@@ -93,10 +93,3 @@ export function validateTitle(file: File): boolean {
     return false;
   }
 }
-
-// export function isMatchDataType(file: File): boolean {
-//   try {
-//   } catch (e) {
-//     return false;
-//   }
-// }

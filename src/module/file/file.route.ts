@@ -1,13 +1,16 @@
 import { Router } from 'express';
 import multer from 'multer';
+import { configExportFile, initExportDir } from '~/util/export';
 import { configUploadFile, initUploadDir } from '~/util/upload';
-import { fileValidator } from './file.middleware';
+import { exportValidator, uploadValidator } from './file.middleware';
 
 const fileRouter = Router();
 
-const storage = configUploadFile(initUploadDir());
+const storageUpload = configUploadFile(initUploadDir());
+const handleUpload = multer({ storage: storageUpload });
 
-const upload = multer({ storage: storage });
+const storageExport = configExportFile(initExportDir());
+const handleExport = multer({ storage: storageExport });
 
 /*
 desc: validate file format when uploading
@@ -19,6 +22,18 @@ body: form-data
   value: file
   description:
 */
-fileRouter.post('/upload', upload.single('myFile'), fileValidator);
+fileRouter.post('/upload', handleUpload.single('myFile'), uploadValidator);
+
+/*
+desc: receive a valid file and export it
+method: POST
+path: /file/export
+headers: empty
+body: form-data
+  key: myFile (File)
+  value: file
+  description:
+*/
+fileRouter.post('/export', handleExport.single('myFile'), exportValidator);
 
 export default fileRouter;
